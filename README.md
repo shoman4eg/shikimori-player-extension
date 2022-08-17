@@ -1,7 +1,6 @@
-### Shikimori player extension
+# Shikimori player extension
 
 ## CLI Commands
-
 ``` bash
 # install dependencies
 npm install
@@ -12,5 +11,11 @@ npm run dev
 # build for production with minification
 npm run build
 
-# test the production build locally
-npm run serve
+# test the extension locally in firefox
+npm run start:firefox
+
+# test the extension locally in chrome
+npm run start:chromium
+
+# send extension to addons.firefox
+npm run sign:firefox
