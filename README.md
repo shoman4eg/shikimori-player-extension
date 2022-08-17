@@ -1,5 +1,7 @@
 # Shikimori player extension
 
+![Site Preview](.github/assets/sitePreview.jpg)
+![Preview](.github/assets/preview.jpg)
 ## CLI Commands
 ``` bash
 # install dependencies
