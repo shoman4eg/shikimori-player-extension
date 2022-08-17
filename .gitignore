@@ -1,0 +1,7 @@
+node_modules
+/*.log
+.env
+/*.zip
+extension/*
+!extension/assets
+!extension/background

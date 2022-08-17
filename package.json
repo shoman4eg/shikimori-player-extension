@@ -1,0 +1,63 @@
+{
+  "private": true,
+  "name": "shiki-player-ext",
+  "displayName": "Shikimori player extension",
+  "description": "Video player for shikimori",
+  "version": "0.2.3",
+  "license": "MIT",
+  "author": {
+    "name": "Artem Dubinin",
+    "email": "artem@dubinin.me",
+    "url": "https://github.com/shoman4eg"
+  },
+  "scripts": {
+    "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
+    "dev:prepare": "tsx scripts/prepare.js",
+    "dev:web": "vite",
+    "dev:js": "npm run build:js -- --mode development",
+    "build": "cross-env NODE_ENV=production run-s clear build:web build:prepare",
+    "build:prepare": "tsx scripts/prepare.js",
+    "build:web": "vite build",
+    "build:js": "vite build",
+    "pack": "cross-env NODE_ENV=production run-p pack:*",
+    "pack:zip": "rimraf extension.zip && jszip add extension -o ./extension.zip",
+    "pack:crx": "crx pack extension -o ./extension.crx",
+    "pack:xpi": "cross-env WEB_EXT_ARTIFACTS_DIR=./ web-ext build --source-dir ./extension --filename extension.xpi --overwrite-dest",
+    "start:chromium": "web-ext run --source-dir ./extension --target=chromium",
+    "start:firefox": "web-ext run --source-dir ./extension --target=firefox-desktop",
+    "clear": "rimraf extension/dist extension/manifest.json",
+    "lint": "eslint 'src/**/*.{json,ts,js}'",
+    "preview": "vite preview",
+    "sign:firefox": "web-ext sign --source-dir ./extension --api-key $(grep API_KEY .env | cut -d '=' -f2) --api-secret $(grep API_SECRET .env | cut -d '=' -f2)"
+  },
+  "eslintConfig": {
+    "extends": "preact",
+    "ignorePatterns": [
+      "build/"
+    ]
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.3.0",
+    "autoprefixer": "^10.4.8",
+    "chokidar": "^3.5.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-preact": "^1.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "fs-extra": "^10.1.0",
+    "jszip-cli": "^1.4.24",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^3.1.8",
+    "tsx": "^3.8.1",
+    "vite": "^3.0.4",
+    "web-ext": "^7.1.1"
+  },
+  "dependencies": {
+    "preact": "^10.10.0",
+    "webext-bridge": "^5.0.5",
+    "webextension-polyfill": "^0.9.0"
+  }
+}
